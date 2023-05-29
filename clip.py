@@ -5,7 +5,7 @@ import open_clip
 import requests
 from PIL import Image
 
-def calculate_similarity(image_path, texts):
+def get_embedding(image_path, texts):
 
     # get text embedding
     model_name = 'M-CLIP/XLM-Roberta-Large-Vit-B-16Plus'
@@ -27,4 +27,5 @@ def calculate_similarity(image_path, texts):
     with torch.no_grad():
         image_features = model.encode_image(image)
 
-    return (image_features @ text_features.T).softmax(dim=-1)
+    return (text_features, image_features)
+    #return (image_features @ text_features.T).softmax(dim=-1)
